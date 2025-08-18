@@ -1,0 +1,36 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:8080"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DB_HOST=db
+      - DB_USER=gorgi
+      - DB_PASSWORD=gorgi
+      - DB_NAME=gorgi
+
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: gorgi
+      MYSQL_DATABASE: gorgi
+      MYSQL_USER: gorgi
+      MYSQL_PASSWORD: gorgi
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ugorgi", "-pgorgi"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
