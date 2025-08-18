@@ -1,3 +1,7 @@
+networks:
+  app-network:
+    driver: bridge
+
 services:
   frontend:
     build: ./frontend
@@ -5,6 +9,8 @@ services:
       - "80:8080"
     depends_on:
       - backend
+    networks:
+      - app-network
 
   backend:
     build: ./backend
@@ -16,6 +22,8 @@ services:
       - DB_USER=gorgi
       - DB_PASSWORD=gorgi
       - DB_NAME=gorgi
+    networks:
+      - app-network
 
   db:
     image: mysql:8
@@ -31,6 +39,9 @@ services:
       retries: 5
     volumes:
       - db_data:/var/lib/mysql
+    networks:
+      - app-network
 
 volumes:
   db_data:
+    driver: local
