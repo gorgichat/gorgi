@@ -1,5 +1,7 @@
 # Gorgi
 
+<img width="756" height="1024" alt="maski" src="https://github.com/user-attachments/assets/444c75c8-47bf-4e2e-b698-e295c6bf4be5" />
+
 Small, focused repository for a production-ready Gorgi Chat deployment.
 
 Clone
