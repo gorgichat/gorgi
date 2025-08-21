@@ -32,7 +32,7 @@ Clone
 - Update submodules and push changes:
 
   ```bash
-  git submodule foreach git pull
+  git submodule foreach git pull origin main
   git add .
   git commit -m "msg"
   git push
